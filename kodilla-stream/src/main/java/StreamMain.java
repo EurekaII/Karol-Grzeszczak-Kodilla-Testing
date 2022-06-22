@@ -22,3 +22,4 @@ public class StreamMain {
                 .forEach(System.out::println);
     }
 }
+

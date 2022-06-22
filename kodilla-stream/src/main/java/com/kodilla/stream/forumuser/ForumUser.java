@@ -17,32 +17,41 @@ public class ForumUser {
         this.birthdate = birthdate;
         this.posts = posts;
     }
+
     //for male
     public boolean isMale() {
         return gender == 'M' || gender == 'm';
     }
+
     //for female
     public boolean isFemale() {
         return gender == 'F' || gender == 'f';
     }
+
     public boolean isOver20() {
         return LocalDate.now().getYear() - birthdate.getYear() >= 20;
     }
+
     public boolean hasPosts() {
         return posts > 0;
     }
+
     public int getUserId() {
         return userId;
     }
+
     public String getUserName() {
         return userName;
     }
+
     public char getGender() {
         return gender;
     }
+
     public LocalDate getBirthdate() {
         return birthdate;
     }
+
     public int getPosts() {
         return posts;
     }
