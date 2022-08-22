@@ -2,6 +2,9 @@ package com.kodilla.testing.shape;
 
 import org.junit.jupiter.api.*;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
 @DisplayName("TDD: Shape test suite")
 public class ShapeCollectorTestSuite {
 
@@ -29,46 +32,67 @@ public class ShapeCollectorTestSuite {
         @Test
         public void addFigure() {
             //Given
-            ShapeCollector shapeCollector = new ShapeCollector();
-            shapeCollector.addFigure(new Circle(2.0));
+            ShapeCollector collector = new ShapeCollector();
+            Circle circle = new Circle("Koło1", 4);
+            Triangle triangle = new Triangle("Trojkat", 4,3);
+
 
             //When
-            result shapeCollector.addFigure(new Circle(2.0));
+            collector.addFigure(circle);
+            collector.addFigure(triangle);
 
 
             //Then
-            Assertions.assertTrue(result);
+            assertEquals(2, collector.getShapesQuantity());
+
+
+
         }
         @Test
         public void removeFigure() {
             //Given
-            ShapeCollector shapeCollector = new ShapeCollector();
-            shapeCollector.addFigure(new Circle(2.0));
+            ShapeCollector collector = new ShapeCollector();
+            Circle circle = new Circle("Koło1", 4);
+            Triangle triangle = new Triangle("Trojkat", 4,3);
+            collector.addFigure(circle);
+            collector.addFigure(triangle);
 
             //When
-            boolean result = shapeCollector.removeFigure(shapeCollector.getFigure());
+            collector.removeFigure(circle);
+
 
             //Then
-        }
+            assertEquals(1, collector.getShapesQuantity());
+
+}
         @Test
         public void getFigure() {
             //Given
-            ShapeCollector shapeCollector = new ShapeCollector();
-            shapeCollector.addFigure(new Circle(2.0));
-
+            ShapeCollector collector = new ShapeCollector();
+            Circle circle = new Circle("Kolo1", 4);
+            collector.addFigure(circle);
             //When
-             = shapeCollector.getFigure().getShapeName();
+            collector.getShape(0);
+
+
             //Then
+            assertEquals(circle, collector.getShape(0));
+
         }
         @Test
         public void showFigures() {
             //Given
-            ShapeCollector shapeCollector = new ShapeCollector();
-            shapeCollector.addFigure(new Circle(2.0));
+            ShapeCollector collector = new ShapeCollector();
+            Circle circle = new Circle("Koło1", 4);
+            Triangle triangle = new Triangle("Trojkat", 4,3);
 
             //When
+            collector.addFigure(triangle);
+            collector.addFigure(circle);
+
 
             //Then
-        }
+            assertEquals(2, collector.showFigures().size());
+}
     }
 }
