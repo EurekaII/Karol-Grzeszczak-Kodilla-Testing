@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import com.kodilla.testing.collection.*;
-
 
 @DisplayName("Collection Test Suite")
 public class CollectionTestSuite {
