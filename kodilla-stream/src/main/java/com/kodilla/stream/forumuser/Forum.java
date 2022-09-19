@@ -19,6 +19,8 @@ public class Forum {
         forumUsers.add(new ForumUser("Maks", 'M', LocalDate.of(2004, Month.FEBRUARY, 11),17));
         forumUsers.add(new ForumUser("Franciszek", 'M',LocalDate.of(1991, Month.SEPTEMBER, 11),0));
         forumUsers.add(new ForumUser("Emilia", 'F', LocalDate.of(1991, Month.JULY, 7), 0));
+        forumUsers.add(new ForumUser("Lola", 'F', LocalDate.of(2002, Month.SEPTEMBER, 19), 10));
+        forumUsers.add(new ForumUser("Lala", 'F', LocalDate.of(2002, Month.SEPTEMBER, 21), 10));
     }
     public List<ForumUser> getUserList() {
         return forumUsers;

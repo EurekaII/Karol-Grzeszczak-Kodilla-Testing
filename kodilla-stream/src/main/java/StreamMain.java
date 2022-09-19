@@ -3,7 +3,10 @@ import com.kodilla.stream.iterate.NumbersGenerator;
 import com.kodilla.stream.lambda.*;
 import com.kodilla.stream.reference.FunctionalCalculator;
 
+import java.time.LocalDate;
+
 public class StreamMain {
+
     public static void main(String[] args) {
         PoemBeautifier poemBeautifier = new PoemBeautifier();
 
@@ -14,6 +17,8 @@ public class StreamMain {
 
         System.out.println("Using Stream to generate even numbers from 1 to 20");
         NumbersGenerator.generateEven(20);
+
+
 
     }
 }
