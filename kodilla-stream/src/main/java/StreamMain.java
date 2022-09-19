@@ -1,25 +1,29 @@
-import com.kodilla.stream.beautifier.PoemBeautifier;
-import com.kodilla.stream.iterate.NumbersGenerator;
-import com.kodilla.stream.lambda.*;
-import com.kodilla.stream.reference.FunctionalCalculator;
+
+import com.kodilla.stream.forumuser.Forum;
+import com.kodilla.stream.forumuser.ForumUser;
+
 
 import java.time.LocalDate;
+
 
 public class StreamMain {
 
     public static void main(String[] args) {
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
 
-        poemBeautifier.beautify("LISA", (text) -> text.toLowerCase());
-        poemBeautifier.beautify("LISA", (text) -> "ABC " + text + " ABC");
-        poemBeautifier.beautify("LISA", (text) -> text.substring(0, 2));
-        poemBeautifier.beautify("LISA", (text) -> text.replace("A", "EK"));
-
-        System.out.println("Using Stream to generate even numbers from 1 to 20");
-        NumbersGenerator.generateEven(20);
-
-
-
+        //method reference
+        new Forum().getUserList().stream()
+                .filter(ForumUser::isFemale)
+                .filter(ForumUser::isOver20)
+                .filter(ForumUser::hasPosts)
+                .forEach(System.out::println);
+        System.out.println("####################");
+        //using lambdas
+        new Forum().getUserList().stream()
+                .filter(e -> e.getGender() == 'F' || e.getGender() == 'f')
+                .filter(e -> LocalDate.now().getYear() - e.getBirthdate().getYear() >= 20) // dla przykładu stary warunek
+                //.filter(e -> e.isOver20()) można użyć tak
+                .filter(e -> e.getPosts() > 0)
+                .forEach(System.out::println);
     }
 }
 
