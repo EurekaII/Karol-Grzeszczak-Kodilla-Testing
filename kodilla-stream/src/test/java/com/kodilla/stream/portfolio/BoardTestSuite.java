@@ -1,5 +1,6 @@
 package com.kodilla.stream.portfolio;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ class BoardTestSuite {
         //When
 
         //Then
-        assertEquals(3, project.getTaskList().size());
+        assertEquals(3, project.getTaskLists().size());
     }
 
     private Board prepareTestData() {
@@ -91,7 +92,7 @@ class BoardTestSuite {
 
         //When
         User user = new User("developer1", "John Smith");     // [1]
-        List<Task> tasks = project.getTaskList().stream()    // [2]
+        List<Task> tasks = project.getTaskLists().stream()    // [2]
                 .flatMap(l -> l.getTasks().stream())               // [3]
                 .filter(t -> t.getAssignedUser().equals(user))     // [4]
                 .collect(toList());                                // [5]
@@ -110,7 +111,7 @@ class BoardTestSuite {
         List<TaskList> undoneTasks = new ArrayList<>();             // [1]
         undoneTasks.add(new TaskList("To do"));                     // [2]
         undoneTasks.add(new TaskList("In progress"));               // [3]
-        List<Task> tasks = project.getTaskList().stream()          // [4]
+        List<Task> tasks = project.getTaskLists().stream()          // [4]
                 .filter(undoneTasks::contains)                           // [5]
                 .flatMap(tl -> tl.getTasks().stream())                   // [6]
                 .filter(t -> t.getDeadline().isBefore(LocalDate.now()))  // [7]
@@ -119,5 +120,34 @@ class BoardTestSuite {
         //Then
         assertEquals(1, tasks.size());                              // [9]
         assertEquals("HQLs for analysis", tasks.get(0).getTitle()); // [10]
+    }
+
+    @Test
+    void testAddTaskListAverageWorkingOnTask() {
+        //Given
+        Board project = prepareTestData();
+        List<TaskList> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add(new TaskList("In progress"));
+
+        //When
+        int result = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(tl -> tl.getTasks().stream())
+                .map(Task::getCreated)
+                .map(d -> LocalDate.now().getDayOfYear() - d.getDayOfYear())
+                .reduce(0, (sum, current) -> sum = sum + current);
+
+        long quantity = project.getTaskLists().stream()
+                .filter(inProgressTasks::contains)
+                .flatMap(tl -> tl.getTasks().stream())
+                .map(n -> 1)
+                .count();
+
+        double average = result / quantity;
+
+        //Then
+        Assertions.assertEquals(10, average);
+
+
     }
 }
