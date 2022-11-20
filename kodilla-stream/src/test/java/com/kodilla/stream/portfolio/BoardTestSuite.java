@@ -143,7 +143,7 @@ class BoardTestSuite {
                 .map(n -> 1)
                 .count();
 
-        double average = result / quantity;
+        double average = (double) result / quantity;
 
         //Then
         Assertions.assertEquals(10, average);

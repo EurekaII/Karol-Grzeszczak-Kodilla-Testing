@@ -2,6 +2,8 @@ package com.kodilla.stream.portfolio;
 
 import com.kodilla.stream.sand.SandStorage;
 
+import java.util.Objects;
+
 public final class User {
 
     private final String username;
@@ -33,4 +35,9 @@ public final class User {
         User user = (User) o;
         return username.equals(user.username);
     }
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
+    }
+
 }
